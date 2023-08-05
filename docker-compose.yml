@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src:/taskmanager/src
+    command: npm run dev
+    expose:
+      - '3333'
+    ports:
+      - '3333:3333'
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_HOST=postgres
+    depends_on:
+     - postgres
+
+  postgres: 
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgresDB:/data/postgres
+    env_file:
+      - ./.env 
+
+
+volumes:
+  postgresDB:
+  
