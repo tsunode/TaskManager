@@ -27,8 +27,24 @@ services:
     volumes:
       - postgresDB:/data/postgres
     env_file:
-      - ./.env 
+      - ./.env
 
+  migrate:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    command: 
+        npm run migrate
+    links:
+      - postgres
+    depends_on:
+      - postgres
+      - api
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_DB=task_manager
 
 volumes:
   postgresDB:
