@@ -5,8 +5,8 @@
    "main": "index.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/index.ts",
-      "start": "ts-node src/index.ts",
+      "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+      "start": "ts-node src/server.ts",
       "typeorm": "typeorm-ts-node-commonjs",
       "makemigrations": "npm run typeorm migration:generate -- -d ./src/data-source",
       "migrate": "npm run typeorm migration:run -- -d ./src/data-source"
