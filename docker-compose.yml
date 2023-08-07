@@ -45,6 +45,7 @@ services:
       - ./.env
     environment:
       - POSTGRES_DB=task_manager
+      - POSTGRES_HOST=postgres
 
 volumes:
   postgresDB:
