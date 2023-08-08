@@ -9,23 +9,32 @@ class TypeOrmUsersRepositories implements UsersRepositorie {
     private repository: Repository<User> = AppDataSource.getRepository(User);
 
     async create(userData: TUserRequest): Promise<User> {
-        return await this.repository.create(userData)
+        const user = this.repository.create(userData)
+        await this.repository.save(user);
+
+        return user;
     }
-    findAll(): Promise<User[]> {
-        throw new Error("Method not implemented.");
+
+    async findAll(): Promise<User[]> {
+        return await this.repository.find();
     }
+
     findById(userId: string): Promise<User> {
         throw new Error("Method not implemented.");
     }
+
     findByName(userName: string): Promise<User> {
         throw new Error("Method not implemented.");
     }
+
     updateById(userId: string, userData: TUserUpdate): Promise<User> {
         throw new Error("Method not implemented.");
     }
+
     deleteById(userId: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
+
 }
 
 const usersRepositorie = new TypeOrmUsersRepositories();

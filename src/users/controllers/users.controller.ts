@@ -11,21 +11,29 @@ class UsersContoller {
 
         return res.status(201).json(user);
     }
-    findAll(): Promise<TUserResponse[]> {
+
+    async findAll(req: Request, res: Response): Promise<Response> {
+        const users = await this.usersService.findAll();
+
+        return res.json(users);
+    }
+
+    async findById(req: Request, res: Response): Promise<Response> {
         throw new Error("Method not implemented.");
     }
-    findById(userId: string): Promise<TUserResponse> {
+
+    async findByName(req: Request, res: Response): Promise<Response> {
         throw new Error("Method not implemented.");
     }
-    findByName(userName: string): Promise<TUserResponse> {
+
+    async updateById(req: Request, res: Response): Promise<Response> {
         throw new Error("Method not implemented.");
     }
-    updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse> {
+
+    async deleteById(req: Request, res: Response): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    deleteById(userId: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+
 }
 
 const usersController = new UsersContoller(usersServices);

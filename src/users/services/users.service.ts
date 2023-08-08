@@ -11,21 +11,29 @@ class UsersService {
 
         return schemas.response.parse(user);
     }
-    findAll(): Promise<TUserResponse[]> {
+
+    async findAll(): Promise<TUserResponse[]> {
+        const users = await this.usersRepository.findAll();
+
+        return users.map(user => schemas.response.parse(user));
+    }
+
+    async findById(userId: string): Promise<TUserResponse> {
         throw new Error("Method not implemented.");
     }
-    findById(userId: string): Promise<TUserResponse> {
+
+    async findByName(userName: string): Promise<TUserResponse> {
         throw new Error("Method not implemented.");
     }
-    findByName(userName: string): Promise<TUserResponse> {
+
+    async updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse> {
         throw new Error("Method not implemented.");
     }
-    updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse> {
+
+    async deleteById(userId: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    deleteById(userId: string): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
+
 }
 
 const usersServices = new UsersService(usersRepositorie);
