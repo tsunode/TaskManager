@@ -1,10 +1,13 @@
+import { User } from "../../database/entities/users.entity";
 import { TUserRequest, TUserResponse, TUserUpdate } from "../interfaces/users.interfaces";
 
-export abstract class UsersRepositories {
-    abstract create(userData: TUserRequest): Promise<TUserResponse>;
-    abstract findAll(): Promise<TUserResponse[]>;
-    abstract findById(userId: string): Promise<TUserResponse>;
-    abstract findByName(userName: string): Promise<TUserResponse>;
-    abstract updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse>;
+abstract class UsersRepositorie {
+    abstract create(userData: TUserRequest): Promise<User>;
+    abstract findAll(): Promise<User[]>;
+    abstract findById(userId: string): Promise<User>;
+    abstract findByName(userName: string): Promise<User>;
+    abstract updateById(userId: string, userData: TUserUpdate): Promise<User>;
     abstract deleteById(userId: string): Promise<void>;
 }
+
+export { UsersRepositorie }
