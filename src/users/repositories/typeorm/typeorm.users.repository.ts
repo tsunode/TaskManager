@@ -19,19 +19,27 @@ class TypeOrmUsersRepositories implements UsersRepositorie {
         return await this.repository.find();
     }
 
-    findById(userId: string): Promise<User> {
+    async findById(userId: string): Promise<User> {
+        const user: User | null = await this.repository.findOneBy({
+            id: userId
+        })
+
+        return user!
+    }
+
+    async findByName(userName: string): Promise<User> {
+        const user: User | null = await this.repository.findOneBy({
+            name: userName
+        })
+        console.log(user)
+        return user!
+    }
+
+    async updateById(userId: string, userData: TUserUpdate): Promise<User> {
         throw new Error("Method not implemented.");
     }
 
-    findByName(userName: string): Promise<User> {
-        throw new Error("Method not implemented.");
-    }
-
-    updateById(userId: string, userData: TUserUpdate): Promise<User> {
-        throw new Error("Method not implemented.");
-    }
-
-    deleteById(userId: string): Promise<void> {
+    async deleteById(userId: string): Promise<void> {
         throw new Error("Method not implemented.");
     }
 

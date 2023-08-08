@@ -19,11 +19,15 @@ class UsersService {
     }
 
     async findById(userId: string): Promise<TUserResponse> {
-        throw new Error("Method not implemented.");
+        const user = await this.usersRepository.findById(userId)
+
+        return schemas.response.parse(user);
     }
 
     async findByName(userName: string): Promise<TUserResponse> {
-        throw new Error("Method not implemented.");
+        const user = await this.usersRepository.findByName(userName)
+
+        return schemas.response.parse(user);
     }
 
     async updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse> {

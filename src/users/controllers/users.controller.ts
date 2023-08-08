@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { TUserResponse, TUserUpdate } from "../interfaces/users.interfaces";
 import { UsersService, usersServices } from "../services/users.service";
 
 class UsersContoller {
@@ -19,11 +18,19 @@ class UsersContoller {
     }
 
     async findById(req: Request, res: Response): Promise<Response> {
-        throw new Error("Method not implemented.");
+        const { id }= req.params
+        const user = await this.usersService.findById(id)
+
+        return res.json(user);
     }
 
     async findByName(req: Request, res: Response): Promise<Response> {
-        throw new Error("Method not implemented.");
+        console.log("--------------------------------------------------------")
+        const { name }= req.params
+        console.log(name)
+        const user = await this.usersService.findByName(name)
+
+        return res.json(user);
     }
 
     async updateById(req: Request, res: Response): Promise<Response> {
