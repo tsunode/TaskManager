@@ -2,6 +2,7 @@ import { Router } from "express";
 import { sharedMiddlewares } from "../../shared/shared.middleware";
 import { tasksController } from "../controllers/tasks.controller";
 import { schemas } from "../schemas/tasks.schemas";
+import { tasksMiddleware } from "../middlewares/tasks.middleware";
 
 const tasksRoute = Router();
 
@@ -16,23 +17,23 @@ tasksRoute.get(
 );
 tasksRoute.get(
     "/:id", 
-    (req, res, next) => tasksMiddleware.ensuretasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.findById(req, res)
 );
 tasksRoute.get(
     "/name/:name", 
-    (req, res, next) => tasksMiddleware.ensuretasksNameExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksNameExists(req, res, next),
     (req, res) => tasksController.findByName(req, res)
 );
 tasksRoute.patch(
     "/:id",
     sharedMiddlewares.validateSchema(schemas.update),
-    (req, res, next) => tasksMiddleware.ensuretasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.updateById(req, res)
 );
 tasksRoute.delete(
     "/:id", 
-    (req, res, next) => tasksMiddleware.ensuretasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.deleteById(req, res)
 );
 
