@@ -1,13 +1,27 @@
 import { Task } from "../../../database/entities/tasks.entity";
 import { TTaskRequest, TTaskUpdate } from "../../interfaces/tasks.interfaces";
+import { TasksRepositorie } from "../tasks.repository";
 
-abstract class TasksRepositorie {
-    abstract create(taskData: TTaskRequest): Promise<Task>;
-    abstract findAll(): Promise<Task[]>;
-    abstract findById(taskId: string): Promise<Task | null>;
-    abstract findByName(taskName: string): Promise<Task>;
-    abstract updateById(taskId: string, taskData: TTaskUpdate): Promise<Task>;
-    abstract deleteById(taskId: string): Promise<void>;    
+class TypeOrmTasksRepositories implements TasksRepositorie {
+    create(taskData: TTaskRequest): Promise<Task> {
+        throw new Error("Method not implemented.");
+    }
+    findAll(): Promise<Task[]> {
+        throw new Error("Method not implemented.");
+    }
+    findById(taskId: string): Promise<Task | null> {
+        throw new Error("Method not implemented.");
+    }
+    findByName(taskName: string): Promise<Task> {
+        throw new Error("Method not implemented.");
+    }
+    updateById(taskId: string, taskData: TTaskUpdate): Promise<Task> {
+        throw new Error("Method not implemented.");
+    }
+    deleteById(taskId: string): Promise<void> {
+        throw new Error("Method not implemented.");
+    }
 }
 
-export { TasksRepositorie }
+const tasksRepositorie = new TypeOrmTasksRepositories()
+export { tasksRepositorie }
