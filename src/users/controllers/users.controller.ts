@@ -25,16 +25,18 @@ class UsersContoller {
     }
 
     async findByName(req: Request, res: Response): Promise<Response> {
-        console.log("--------------------------------------------------------")
-        const { name }= req.params
-        console.log(name)
+        const { name } = req.params
         const user = await this.usersService.findByName(name)
 
         return res.json(user);
     }
 
     async updateById(req: Request, res: Response): Promise<Response> {
-        throw new Error("Method not implemented.");
+        const { id }= req.params
+        const userData = req.body
+        const user = await this.usersService.updateById(id, userData);
+
+        return res.json(user)
     }
 
     async deleteById(req: Request, res: Response): Promise<void> {

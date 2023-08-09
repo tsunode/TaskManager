@@ -9,7 +9,7 @@ class TypeOrmUsersRepositories implements UsersRepositorie {
     private repository: Repository<User> = AppDataSource.getRepository(User);
 
     async create(userData: TUserRequest): Promise<User> {
-        const user = this.repository.create(userData)
+        const user: User = this.repository.create(userData)
         await this.repository.save(user);
 
         return user;
@@ -36,7 +36,15 @@ class TypeOrmUsersRepositories implements UsersRepositorie {
     }
 
     async updateById(userId: string, userData: TUserUpdate): Promise<User> {
-        throw new Error("Method not implemented.");
+        const user: User = await this.findById(userId)
+        const newUserData = {
+            ...user,
+            ...userData
+        }
+
+        const userPatched = await this.repository.save(newUserData);
+
+        return userPatched;
     }
 
     async deleteById(userId: string): Promise<void> {

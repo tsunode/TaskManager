@@ -31,7 +31,9 @@ class UsersService {
     }
 
     async updateById(userId: string, userData: TUserUpdate): Promise<TUserResponse> {
-        throw new Error("Method not implemented.");
+        const user = await this.usersRepository.updateById(userId, userData);
+
+        return schemas.response.parse(user);
     }
 
     async deleteById(userId: string): Promise<void> {
