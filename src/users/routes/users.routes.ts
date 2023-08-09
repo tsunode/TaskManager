@@ -19,6 +19,7 @@ usersRoute.get(
 );
 usersRoute.get(
     "/name/:name", 
+    (req, res, next) => usersMiddleware.ensureUsersNameExists(req, res, next),
     (req, res) => usersController.findByName(req, res)
 );
 usersRoute.patch(
