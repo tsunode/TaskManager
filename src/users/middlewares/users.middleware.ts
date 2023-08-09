@@ -4,7 +4,6 @@ import { NextFunction, Request, Response } from "express";
 import { AppDataSource } from "../../data-source";
 import { User } from "../../database/entities/users.entity";
 
-
 class UsersMiddleware {
     private repository: Repository<User> = AppDataSource.getRepository(User);
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import schemas from "../schemas/users.schemas";
+import { schemas } from "../schemas/users.schemas";
 import { DeepPartial } from "typeorm";
 
 type TUser = z.infer<typeof schemas.user>;

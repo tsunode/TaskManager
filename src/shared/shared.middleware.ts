@@ -40,4 +40,4 @@ class SharedMiddlewares {
 }
 
 const sharedMiddlewares = new SharedMiddlewares();
-export { sharedMiddlewares };
+export { sharedMiddlewares, AppError };

@@ -1,7 +1,7 @@
 import { TUserRequest, TUserResponse, TUserUpdate } from "../interfaces/users.interfaces";
 import { usersRepositorie } from "../repositories/typeorm/typeorm.users.repository";
 import { UsersRepositorie } from "../repositories/users.repository";
-import schemas from "../schemas/users.schemas";
+import { schemas } from "../schemas/users.schemas";
 
 class UsersService {
     constructor(private usersRepository: UsersRepositorie) {}

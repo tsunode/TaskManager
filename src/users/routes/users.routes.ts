@@ -3,7 +3,7 @@ import { Router } from "express";
 import { usersController } from "../controllers/users.controller";
 import { usersMiddleware } from "../middlewares/users.middleware";
 import { sharedMiddlewares } from "../../shared/shared.middleware";
-import schemas from "../schemas/users.schemas";
+import { schemas } from "../schemas/users.schemas";
 
 const usersRoute = Router();
 

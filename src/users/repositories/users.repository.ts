@@ -1,5 +1,5 @@
 import { User } from "../../database/entities/users.entity";
-import { TUserRequest, TUserResponse, TUserUpdate } from "../interfaces/users.interfaces";
+import { TUserRequest, TUserUpdate } from "../interfaces/users.interfaces";
 
 abstract class UsersRepositorie {
     abstract create(userData: TUserRequest): Promise<User>;
