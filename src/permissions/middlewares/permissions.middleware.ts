@@ -1,0 +1,34 @@
+import { NextFunction, Request, Response } from "express";
+import { Repository } from "typeorm";
+
+import { AppDataSource } from "../../data-source";
+import { Permission } from "../../database/entities/permissions.entity";
+
+class PermissionsMiddleware {
+    private repository: Repository<Permission> = AppDataSource.getRepository(Permission);
+
+    async ensurepermissionsIdExists(req: Request, res: Response, next: NextFunction) {
+        const { id } = req.params
+        const permission: Permission | null = await this.repository.findOneBy({
+            id: id
+        });
+
+        if (!permission) return res.status(404).json({"message": "permission not Found!"})
+
+        return next();
+    }
+
+    async ensurepermissionsNameExists(req: Request, res: Response, next: NextFunction) {
+        const { name } = req.params
+        const permission: Permission | null = await this.repository.findOneBy({
+            name: name
+        });
+
+        if (!permission) return res.status(404).json({"message": "permission not Found!"})
+
+        return next();
+    }
+}
+
+const permissionsMiddleware = new PermissionsMiddleware();
+export { permissionsMiddleware };
