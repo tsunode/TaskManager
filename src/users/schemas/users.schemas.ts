@@ -13,6 +13,8 @@ const request = user.omit({ id: true, created_at: true });
 
 const response = user.omit({ password: true });
 
+const update = request.partial();
+
 const login = z.object({
 	email: z.string().email(),
 	password: z.string(),
@@ -22,6 +24,6 @@ const token = z.object({
 	id: z.string(),
 });
 
-const schemas = { user, request, response, login, token };
+const schemas = { user, request, update, response, login, token };
 
 export default schemas;
