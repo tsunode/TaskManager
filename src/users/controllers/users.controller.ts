@@ -32,15 +32,18 @@ class UsersContoller {
     }
 
     async updateById(req: Request, res: Response): Promise<Response> {
-        const { id }= req.params
+        const { id } = req.params
         const userData = req.body
         const user = await this.usersService.updateById(id, userData);
 
         return res.json(user)
     }
 
-    async deleteById(req: Request, res: Response): Promise<void> {
-        throw new Error("Method not implemented.");
+    async deleteById(req: Request, res: Response): Promise<Response> {
+        const { id } = req.params
+        await this.usersService.deleteById(id);
+
+        return res.sendStatus(204);
     }
 
 }

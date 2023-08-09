@@ -48,7 +48,11 @@ class TypeOrmUsersRepositories implements UsersRepositorie {
     }
 
     async deleteById(userId: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        await this.repository.delete({
+            id: userId
+        });
+
+        return
     }
 
 }

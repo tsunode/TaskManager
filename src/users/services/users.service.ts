@@ -37,7 +37,7 @@ class UsersService {
     }
 
     async deleteById(userId: string): Promise<void> {
-        throw new Error("Method not implemented.");
+        await this.usersRepository.deleteById(userId);
     }
 
 }

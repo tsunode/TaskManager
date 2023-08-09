@@ -8,5 +8,6 @@ usersRoute.get("", (req, res) => usersController.findAll(req, res));
 usersRoute.get("/:id", (req, res) => usersController.findById(req, res));
 usersRoute.get("/name/:name", (req, res) => usersController.findByName(req, res));
 usersRoute.patch("/:id", (req, res) => usersController.updateById(req, res));
+usersRoute.delete("/:id", (req, res) => usersController.deleteById(req, res));
 
 export { usersRoute };
