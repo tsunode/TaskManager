@@ -1,8 +1,8 @@
-import { create } from "domain";
+import { Repository } from "typeorm";
+
 import { UsersRepositorie } from "../users.repository";
 import { TUserRequest, TUserUpdate } from "../../interfaces/users.interfaces";
 import { User } from "../../../database/entities/users.entity";
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../../data-source";
 
 class TypeOrmUsersRepositories implements UsersRepositorie {
