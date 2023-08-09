@@ -3,7 +3,7 @@ import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import { BaseEntity } from "./base.entity";
 import { Task } from "./tasks.entity";
 
-@Entity("tasks")
+@Entity("tasks_deadlines")
 export class TaskDeadline extends BaseEntity {
     @Column({ type: "date" })
     expiration_date: Date;
