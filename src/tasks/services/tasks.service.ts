@@ -34,4 +34,4 @@ class TasksService {
 }
 
 const tasksService = new TasksService(tasksRepositorie);
-export { tasksService };
+export { tasksService, TasksService };
