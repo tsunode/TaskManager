@@ -7,7 +7,7 @@ import { Permission } from "../../database/entities/permissions.entity";
 class PermissionsMiddleware {
     private repository: Repository<Permission> = AppDataSource.getRepository(Permission);
 
-    async ensurepermissionsIdExists(req: Request, res: Response, next: NextFunction) {
+    async ensurePermissionsIdExists(req: Request, res: Response, next: NextFunction) {
         const { id } = req.params
         const permission: Permission | null = await this.repository.findOneBy({
             id: id
@@ -18,7 +18,7 @@ class PermissionsMiddleware {
         return next();
     }
 
-    async ensurepermissionsNameExists(req: Request, res: Response, next: NextFunction) {
+    async ensurePermissionsNameExists(req: Request, res: Response, next: NextFunction) {
         const { name } = req.params
         const permission: Permission | null = await this.repository.findOneBy({
             name: name

@@ -35,8 +35,7 @@ permissionsRoute.delete(
     "/:id", 
     (req, res, next) => permissionsMiddleware.ensurePermissionsIdExists(req, res, next),
     (req, res) => permissionsController.deleteById(req, res)
-)P
+)
 
 permissionsRoute.use(sharedMiddlewares.handleError)
-
 export { permissionsRoute };
