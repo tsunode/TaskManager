@@ -1,25 +1,58 @@
+import { Repository } from "typeorm";
+
+import { AppDataSource } from "../../../data-source";
 import { Task } from "../../../database/entities/tasks.entity";
 import { TTaskRequest, TTaskUpdate } from "../../interfaces/tasks.interfaces";
 import { TasksRepositorie } from "../tasks.repository";
 
 class TypeOrmTasksRepositories implements TasksRepositorie {
-    create(taskData: TTaskRequest): Promise<Task> {
-        throw new Error("Method not implemented.");
+    private repository: Repository<Task> = AppDataSource.getRepository(Task);
+
+    async create(taskData: TTaskRequest): Promise<Task> {
+        const task: Task = this.repository.create(taskData)
+        await this.repository.save(task);
+
+        return task;
     }
-    findAll(): Promise<Task[]> {
-        throw new Error("Method not implemented.");
+
+    async findAll(): Promise<Task[]> {
+        return await this.repository.find();
     }
-    findById(taskId: string): Promise<Task | null> {
-        throw new Error("Method not implemented.");
+
+    async findById(taskId: string): Promise<Task> {
+        const task: Task | null = await this.repository.findOneBy({
+            id: taskId
+        })
+
+        return task!
     }
-    findByName(taskName: string): Promise<Task> {
-        throw new Error("Method not implemented.");
+
+    async findByName(taskName: string): Promise<Task> {
+        const task: Task | null = await this.repository.findOneBy({
+            name: taskName
+        })
+        console.log(task)
+        return task!
     }
-    updateById(taskId: string, taskData: TTaskUpdate): Promise<Task> {
-        throw new Error("Method not implemented.");
+
+    async updateById(taskId: string, taskData: TTaskUpdate): Promise<Task> {
+        const task: Task = await this.findById(taskId)
+        const newtaskData = {
+            ...task,
+            ...taskData
+        }
+
+        const taskPatched = await this.repository.save(newtaskData);
+
+        return taskPatched;
     }
-    deleteById(taskId: string): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async deleteById(taskId: string): Promise<void> {
+        await this.repository.delete({
+            id: taskId
+        });
+
+        return
     }
 }
 
