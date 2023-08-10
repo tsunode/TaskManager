@@ -1,5 +1,5 @@
-import { User } from "../../database/entities/users.entity";
-import { TUserRequest, TUserUpdate } from "../interfaces/users.interfaces";
+import { User } from '../../database/entities/users.entity';
+import { TUserRequest, TUserUpdate } from '../interfaces/users.interfaces';
 
 abstract class UsersRepositorie {
     abstract create(userData: TUserRequest): Promise<User>;
@@ -10,4 +10,4 @@ abstract class UsersRepositorie {
     abstract deleteById(userId: string): Promise<void>;
 }
 
-export { UsersRepositorie }
+export { UsersRepositorie };

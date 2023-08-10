@@ -12,8 +12,13 @@ class UsersMiddleware {
         const user: User | null = await this.repository.findOneBy({
             id: id
         });
+        
+        if (!user) return res.status(404).json({"message": "User not Found!"});
 
-        if (!user) return res.status(404).json({"message": "User not Found!"})
+        req.user = {
+            id: user.id
+        }
+
 
         return next();
     }

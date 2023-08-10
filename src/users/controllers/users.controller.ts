@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import { UsersService, usersServices } from "../services/users.service";
+import { container } from "tsyringe";
 
 class UsersContoller {
     constructor(private usersService: UsersService) {}
 
     async create(req: Request, res: Response): Promise<Response> {
         const userData = req.body
-        const user = await this.usersService.create(userData);
+
+        const user = await container.resolve(UsersService).create(userData)
 
         return res.status(201).json(user);
     }
