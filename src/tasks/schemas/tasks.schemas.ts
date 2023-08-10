@@ -11,6 +11,20 @@ const request = task.omit({ id: true, created_at: true });
 
 const update = request.partial();
 
-const schemas = { task, request, update };
+const dateRegex = new RegExp(/\d\d\/\d\d\/\d\d\d\d/i);
+const hourRegex = new RegExp(/\d\d:\d\d:\d\d/i);
+
+const deadline = z.object({
+    id: z.string(),
+    expiration_data: z.string().regex(dateRegex),
+    expiration_hour: z.string().regex(hourRegex),
+    created_at: z.date()
+})
+
+const deadlineRequest = deadline.omit({ id: true, created_at: true });
+
+const deadlineUpdate = deadlineRequest.partial();
+
+const schemas = { task, request, update, deadline, deadlineRequest, deadlineUpdate };
 
 export { schemas };
