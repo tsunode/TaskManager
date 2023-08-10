@@ -2,11 +2,13 @@ import { Repository } from "typeorm";
 
 import { AppDataSource } from "../../../data-source";
 import { Task } from "../../../database/entities/tasks.entity";
-import { TTaskRequest, TTaskUpdate } from "../../interfaces/tasks.interfaces";
+import { TTaskDealineRequest, TTaskDealineUpdate, TTaskRequest, TTaskUpdate } from "../../interfaces/tasks.interfaces";
 import { TasksRepositorie } from "../tasks.repository";
+import { TaskDeadline } from "../../../database/entities/tasksDeadline.entity";
 
 class TypeOrmTasksRepositories implements TasksRepositorie {
     private repository: Repository<Task> = AppDataSource.getRepository(Task);
+    private deadlineRepository: Repository<TaskDeadline> = AppDataSource.getRepository(TaskDeadline);
 
     async create(taskData: TTaskRequest): Promise<Task> {
         const task: Task = this.repository.create(taskData)
@@ -53,6 +55,53 @@ class TypeOrmTasksRepositories implements TasksRepositorie {
         });
 
         return
+    }
+
+    async createDeadline(taskId: string, taskDeadlineData: TTaskDealineRequest): Promise<Task> {
+        const task = await this.findById(taskId)
+
+        const deadline = this.deadlineRepository.create({
+            ...taskDeadlineData,
+            task: task
+        })
+        await this.deadlineRepository.save(deadline);
+
+        const taskWithDealine = await this.repository.findOne({
+            where: {
+                id: taskId
+            },
+            relations: {
+                taskDeadline: true
+            }
+        })
+
+        return taskWithDealine!
+    }
+
+    async updateDeadlineById(taskId: string, taskDeadlineId: string, taskDeadlineData: TTaskDealineUpdate): Promise<Task> {
+        const deadline = await this.deadlineRepository.findOneBy({id: taskId})
+
+        const newDeadline = this.deadlineRepository.create({
+            ...deadline!,
+            ...taskDeadlineData
+        })
+        await this.deadlineRepository.save(newDeadline);
+
+        const taskWithDealine = await this.repository.findOne({
+            where: {
+                id: taskId
+            },
+            relations: {
+                taskDeadline: true
+            }
+        })
+
+        return taskWithDealine!
+    }
+
+    async deleteDeadlineById(taskId: string, taskDeadlineId: string): Promise<void> {
+        const deadline = await this.deadlineRepository.findOneBy({id: taskId})
+        await this.deadlineRepository.remove(deadline!);
     }
 }
 

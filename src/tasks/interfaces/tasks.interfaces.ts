@@ -12,7 +12,7 @@ type TTaskDealine = z.infer<typeof schemas.deadline>;
 
 type TTaskDealineRequest = z.infer<typeof schemas.deadlineRequest>;
 
-type TTaskDealineUpdate = z.infer<typeof schemas.deadlineUpdate>;
+type TTaskDealineUpdate = DeepPartial<TTaskDealineRequest>;
 
 export {
     TTask,
