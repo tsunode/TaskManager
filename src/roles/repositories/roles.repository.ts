@@ -1,13 +1,12 @@
-import { Permission } from "../../database/entities/permissions.entity";
-import { TPermissionRequest, TPermissionUpdate } from "../interfaces/roles.interfaces";
+import { Role } from "../../database/entities/roles.entity";
+import { TRoleRequest, TRoleUpdate } from "../interfaces/roles.interfaces";
 
-abstract class PermissionsRepositorie {
-    abstract create(permissionData: TPermissionRequest): Promise<Permission>;
-    abstract findAll(): Promise<Permission[]>;
-    abstract findById(permissionId: string): Promise<Permission | null>;
-    abstract findByName(permissionName: string): Promise<Permission>;
-    abstract updateById(permissionId: string, permissionData: TPermissionUpdate): Promise<Permission>;
-    abstract deleteById(permissionId: string): Promise<void>;    
+abstract class rolensRepositorie {
+    abstract create(roleData: TRoleRequest): Promise<Role>;
+    abstract findAll(): Promise<Role[]>;
+    abstract findById(roleId: string): Promise<Role | null>;
+    abstract updateById(roleId: string, roleData: TRoleUpdate): Promise<Role>;
+    abstract deleteById(roleId: string): Promise<void>;    
 }
 
-export { PermissionsRepositorie }
+export { rolensRepositorie }
