@@ -16,7 +16,7 @@ tasksRoute.get(
     (req, res) => tasksController.findAll(req, res)
 );
 tasksRoute.get(
-    "/:id", 
+    "/:taskId", 
     (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.findById(req, res)
 );
@@ -26,13 +26,13 @@ tasksRoute.get(
     (req, res) => tasksController.findByName(req, res)
 );
 tasksRoute.patch(
-    "/:id",
+    "/:taskId",
     sharedMiddlewares.validateSchema(schemas.update),
     (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.updateById(req, res)
 );
 tasksRoute.delete(
-    "/:id", 
+    "/:taskId", 
     (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
     (req, res) => tasksController.deleteById(req, res)
 );
@@ -41,15 +41,21 @@ tasksRoute.delete(
 tasksRoute.post(
     "/deadline/:taskId",
     sharedMiddlewares.validateSchema(schemas.deadlineRequest),
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTaskDontHaveAnDeadLine(req, res, next),
     (req, res) => tasksController.createDeadline(req, res)
 )
 tasksRoute.patch(
     "/deadline/:taskId/:deadlineId",
     sharedMiddlewares.validateSchema(schemas.deadlineUpdate),
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksDeadlineIdExists(req, res, next),
     (req, res) => tasksController.updateDeadlineById(req, res)
 )
 tasksRoute.delete(
     "/deadline/:taskId/:deadlineId",
+    (req, res, next) => tasksMiddleware.ensureTasksIdExists(req, res, next),
+    (req, res, next) => tasksMiddleware.ensureTasksDeadlineIdExists(req, res, next),
     (req, res) => tasksController.deleteDeadlineById(req, res)
 )
 

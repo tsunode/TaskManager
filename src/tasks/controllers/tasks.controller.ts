@@ -18,8 +18,8 @@ class TasksContoller {
     }
 
     async findById(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
-        const task = await this.tasksService.findById(id)
+        const { taskId } = req.params
+        const task = await this.tasksService.findById(taskId)
 
         return res.json(task);
     }
@@ -32,16 +32,16 @@ class TasksContoller {
     }
 
     async updateById(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
+        const { taskId } = req.params
         const taskData = req.body
-        const task = await this.tasksService.updateById(id, taskData);
+        const task = await this.tasksService.updateById(taskId, taskData);
 
         return res.json(task)
     }
 
     async deleteById(req: Request, res: Response): Promise<Response> {
-        const { id } = req.params
-        await this.tasksService.deleteById(id);
+        const { taskId } = req.params
+        await this.tasksService.deleteById(taskId);
 
         return res.sendStatus(204);
     }
