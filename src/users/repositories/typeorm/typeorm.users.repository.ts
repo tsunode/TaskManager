@@ -5,7 +5,7 @@ import { UsersRepositorie } from '../users.repository';
 import { TUserRequest, TUserUpdate } from '../../interfaces/users.interfaces';
 
 
-import { User } from '../../../database/entities/users.entity';
+import { User } from '@/database/entities/users.entity';
 import { AppDataSource } from '../../../data-source';
 
 @injectable()
