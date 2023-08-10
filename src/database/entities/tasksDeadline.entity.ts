@@ -5,11 +5,11 @@ import { Task } from "./tasks.entity";
 
 @Entity("tasks_deadlines")
 export class TaskDeadline extends BaseEntity {
-    @Column({ type: "date" })
-    expiration_date: Date;
+    @Column({ type: "varchar" })
+    expiration_date: string;
 
-    @Column({ type: "date" })
-    expiration_hour: Date;
+    @Column({ type: "varchar" })
+    expiration_hour: string;
 
     @OneToOne(() => Task)
     @JoinColumn()
