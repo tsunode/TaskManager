@@ -3,14 +3,14 @@ import { DeepPartial } from "typeorm";
 
 import { schemas } from "../schemas/roles.schemas";
 
-type TPermission = z.infer<typeof schemas.permission>;
+type TRole = z.infer<typeof schemas.role>;
 
-type TPermissionRequest = z.infer<typeof schemas.request>;
+type TRoleRequest = z.infer<typeof schemas.request>;
 
-type TPermissionUpdate = DeepPartial<TPermissionRequest>;
+type TRoleUpdate = DeepPartial<TRoleRequest>;
 
 export {
-    TPermission,
-    TPermissionRequest,
-    TPermissionUpdate
+    TRole,
+    TRoleRequest,
+    TRoleUpdate
 };
