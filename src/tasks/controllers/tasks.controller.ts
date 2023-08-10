@@ -46,6 +46,31 @@ class TasksContoller {
         return res.sendStatus(204);
     }
 
+    async createDeadline(req: Request, res: Response): Promise<Response> {
+        const { taskId } = req.params;
+        const taskDeadlineData = req.body;
+        const task = await this.tasksService.createDeadline(taskId, taskDeadlineData);
+
+        return res.status(201).json(task);
+    }    
+
+    async updateDeadlineById(req: Request, res: Response): Promise<Response> {
+        const { taskId } = req.params;
+        const { deadlineId } = req.params;
+        const taskDeadlineData = req.body;
+        const task = await this.tasksService.updateDeadlineById(taskId, deadlineId, taskDeadlineData);
+
+        return res.json(task);
+    }
+
+    async deleteDeadlineById(req: Request, res: Response): Promise<Response> {
+        const { taskId } = req.params;
+        const { deadlineId } = req.params;
+        const task = await this.tasksService.deleteDeadlineById(deadlineId, taskId);
+
+        return res.sendStatus(204);
+    }
+
 }
 
 const tasksController = new TasksContoller(tasksService);
