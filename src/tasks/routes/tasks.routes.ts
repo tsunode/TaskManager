@@ -40,10 +40,12 @@ tasksRoute.delete(
 // Tasks Deadlines
 tasksRoute.post(
     "/deadline",
+    sharedMiddlewares.validateSchema(schemas.deadlineRequest),
     (req, res) => tasksController.createDeadline(req, res)
 )
 tasksRoute.patch(
     "/deadline/:taskId/:deadlineId",
+    sharedMiddlewares.validateSchema(schemas.deadlineUpdate),
     (req, res) => tasksController.updateDeadlineById(req, res)
 )
 tasksRoute.delete(

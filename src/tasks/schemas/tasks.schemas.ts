@@ -12,7 +12,7 @@ const request = task.omit({ id: true, created_at: true });
 const update = request.partial();
 
 const dateRegex = new RegExp(/\d\d\/\d\d\/\d\d\d\d/i);
-const hourRegex = new RegExp(/\d\d:\d\d:\d\d/i);
+const hourRegex = new RegExp(/\d\d:\d\d/i);
 
 const deadline = z.object({
     id: z.string(),
