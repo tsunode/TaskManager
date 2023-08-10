@@ -1,5 +1,5 @@
 import { Task } from "../../database/entities/tasks.entity";
-import { TTaskRequest, TTaskUpdate } from "../interfaces/tasks.interfaces";
+import { TTaskDealineRequest, TTaskDealineUpdate, TTaskRequest, TTaskUpdate } from "../interfaces/tasks.interfaces";
 import { TasksRepositorie } from "../repositories/tasks.repository";
 import { tasksRepositorie } from "../repositories/typeorm/typeorm.tasks.repository";
 
@@ -30,6 +30,18 @@ class TasksService {
 
     async deleteById(taskId: string): Promise<void> {
         await this.tasksRepositorie.deleteById(taskId);
+    }
+
+    async createDeadline(taskId: string, taskDeadlineData: TTaskDealineRequest): Promise<Task> {
+        return await this.tasksRepositorie.createDeadline(taskId, taskDeadlineData);
+    }
+
+    async updateDeadlineById(taskId: string, taskDeadlineId: string, taskDeadlineData: TTaskDealineUpdate): Promise<Task> {
+        return await this.updateDeadlineById(taskId, taskDeadlineId, taskDeadlineData);
+    }
+
+    async deleteDeadlineById(taskId: string, taskDeadlineId: string): Promise<void> {
+        return await this.deleteDeadlineById(taskId, taskDeadlineId);
     }
 }
 
