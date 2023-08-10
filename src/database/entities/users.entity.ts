@@ -4,6 +4,7 @@ import { getRounds, hashSync } from "bcryptjs";
 import { BaseEntity } from "./base.entity";
 import { Permission } from "./permissions.entity";
 import { Task } from "./tasks.entity";
+import { Role } from "./roles.entity";
 
 @Entity("users")
 export class User extends BaseEntity {
@@ -22,13 +23,13 @@ export class User extends BaseEntity {
     @OneToMany(() => Task, (task) => task.user)
     tasks: Task[];
 
-    @ManyToMany(() => Permission)
+    @ManyToMany(() => Role)
     @JoinTable({
-        name: "users_permissions",
+        name: "users_roles",
         joinColumns: [{ name: "user_id" }],
-        inverseJoinColumns: [{ name: "permission_id" }],
+        inverseJoinColumns: [{ name: "role_id" }],
     })
-    permissions: Permission[];
+    roles: Role[];
 
     @BeforeInsert()
     @BeforeUpdate()
