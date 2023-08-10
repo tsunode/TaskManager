@@ -1,16 +1,16 @@
 import { z } from "zod";
 
-const permission = z.object({
+const role = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
     created_at: z.date()
 });
 
-const request = permission.omit({ id: true, created_at: true });
+const request = role.omit({ id: true, created_at: true });
 
 const update = request.partial();
 
-const schemas = { permission, request, update };
+const schemas = { role, request, update };
 
 export { schemas };
