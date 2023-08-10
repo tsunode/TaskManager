@@ -37,6 +37,20 @@ tasksRoute.delete(
     (req, res) => tasksController.deleteById(req, res)
 );
 
+// Tasks Deadlines
+tasksRoute.post(
+    "/deadline",
+    (req, res) => tasksController.createDeadline(req, res)
+)
+tasksRoute.patch(
+    "/deadline/:taskId/:deadlineId",
+    (req, res) => tasksController.updateDeadlineById(req, res)
+)
+tasksRoute.delete(
+    "/deadline/:taskId/:deadlineId",
+    (req, res) => tasksController.deleteDeadlineById(req, res)
+)
+
 tasksRoute.use(sharedMiddlewares.handleError)
 
 export { tasksRoute };
