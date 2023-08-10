@@ -1,5 +1,5 @@
 import { Task } from "../../database/entities/tasks.entity";
-import { TTaskRequest, TTaskUpdate } from "../interfaces/tasks.interfaces";
+import { TTaskDealineRequest, TTaskDealineUpdate, TTaskRequest, TTaskUpdate } from "../interfaces/tasks.interfaces";
 
 abstract class TasksRepositorie {
     abstract create(taskData: TTaskRequest): Promise<Task>;
@@ -10,4 +10,10 @@ abstract class TasksRepositorie {
     abstract deleteById(taskId: string): Promise<void>;    
 }
 
-export { TasksRepositorie }
+abstract class TasksDeadlinesRepositorie {
+    abstract createDeadline(taskId: string, taskDeadlineData: TTaskDealineRequest): Promise<Task>;
+    abstract updateById(taskId: string, taskDeadlineData: TTaskDealineUpdate): Promise<Task>;
+    abstract deleteById(taskId: string, taskDeadlineId: string): Promise<void>;      
+}
+
+export { TasksRepositorie, TasksDeadlinesRepositorie }
