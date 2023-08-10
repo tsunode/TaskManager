@@ -16,7 +16,7 @@ const hourRegex = new RegExp(/\d\d:\d\d/i);
 
 const deadline = z.object({
     id: z.string(),
-    expiration_data: z.string().regex(dateRegex),
+    expiration_date: z.string().regex(dateRegex),
     expiration_hour: z.string().regex(hourRegex),
     created_at: z.date()
 })

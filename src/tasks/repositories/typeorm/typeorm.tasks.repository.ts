@@ -79,7 +79,7 @@ class TypeOrmTasksRepositories implements TasksRepositorie {
     }
 
     async updateDeadlineById(taskId: string, taskDeadlineId: string, taskDeadlineData: TTaskDealineUpdate): Promise<Task> {
-        const deadline = await this.deadlineRepository.findOneBy({id: taskId})
+        const deadline = await this.deadlineRepository.findOneBy({id: taskDeadlineId})
 
         const newDeadline = this.deadlineRepository.create({
             ...deadline!,
@@ -99,8 +99,8 @@ class TypeOrmTasksRepositories implements TasksRepositorie {
         return taskWithDealine!
     }
 
-    async deleteDeadlineById(taskId: string, taskDeadlineId: string): Promise<void> {
-        const deadline = await this.deadlineRepository.findOneBy({id: taskId})
+    async deleteDeadlineById(taskDeadlineId: string): Promise<void> {
+        const deadline = await this.deadlineRepository.findOneBy({id: taskDeadlineId})
         await this.deadlineRepository.remove(deadline!);
     }
 }

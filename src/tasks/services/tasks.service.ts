@@ -37,11 +37,11 @@ class TasksService {
     }
 
     async updateDeadlineById(taskId: string, taskDeadlineId: string, taskDeadlineData: TTaskDealineUpdate): Promise<Task> {
-        return await this.updateDeadlineById(taskId, taskDeadlineId, taskDeadlineData);
+        return await this.tasksRepositorie.updateDeadlineById(taskId, taskDeadlineId, taskDeadlineData);
     }
 
-    async deleteDeadlineById(taskId: string, taskDeadlineId: string): Promise<void> {
-        return await this.deleteDeadlineById(taskId, taskDeadlineId);
+    async deleteDeadlineById(taskDeadlineId: string): Promise<void> {
+        return await this.tasksRepositorie.deleteDeadlineById(taskDeadlineId)
     }
 }
 

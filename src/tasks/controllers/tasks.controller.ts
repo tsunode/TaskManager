@@ -64,9 +64,8 @@ class TasksContoller {
     }
 
     async deleteDeadlineById(req: Request, res: Response): Promise<Response> {
-        const { taskId } = req.params;
         const { deadlineId } = req.params;
-        const task = await this.tasksService.deleteDeadlineById(deadlineId, taskId);
+        await this.tasksService.deleteDeadlineById(deadlineId);
 
         return res.sendStatus(204);
     }
